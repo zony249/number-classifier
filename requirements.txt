@@ -1,0 +1,4 @@
+# python v3.9.1
+numpy==1.19.0
+matplotlib==3.3.3
+idx2numpy==1.2.3

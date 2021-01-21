@@ -1,0 +1,30 @@
+
+get data (Done)
+|
+v
+reshape (Done)
+|
+v
+split into k folds 
+{
+	
+	- Section 1
+		- create vector of k elements (vec1)
+		- each element will store a fraction of the data set
+	
+	- Section 2
+		- Splitting up the dataset in a striped fashion
+		- k-1 stripes for training, 1 stripe for cv
+		- gives k combinations of training sets
+		- store those into the vector outlined in section 1
+	
+	- Section 3
+		- create another vector of k elements (vec2)
+		- put the validation slices into this vector (there will be k slices)
+		
+	- Finally:
+		- return (vec1, vec2)
+
+
+
+}
