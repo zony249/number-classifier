@@ -25,3 +25,24 @@ split into k folds
 	- Finally:
 		- return (vec1, vec2)
 } (Done?)
+|
+v
+train
+{
+	- Section 1
+		- create NN class
+		- add layers (Layer class?)
+}
+
+
+
+
+############ Scratch Notes ##############
+
+
+
+
+
+
+
+#########################################
