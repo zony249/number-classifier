@@ -24,7 +24,4 @@ split into k folds
 		
 	- Finally:
 		- return (vec1, vec2)
-
-
-
-}
+} (Done?)
