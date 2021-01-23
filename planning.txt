@@ -32,6 +32,13 @@ train
 	- Section 1
 		- create NN class
 		- add layers (Layer class?)
+
+	- Flow
+		- init nn object
+		- add layers
+		- nn.init_weights
+			- nn interacts with layers
+			- tells layers what weight dimension to build
 }
 
 

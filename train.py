@@ -1,8 +1,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import idx2numpy
-from crossVal import *
 
+from crossval import *
+from nn import *
 
 def main():
 
@@ -19,10 +20,15 @@ def main():
     # [np.array_1, np.array_2 ... np.array_k]
     k_fold_tset, k_fold_valset = create_k_folds(trainX, 10)
     
-    
+    model = NN()
+    model.add_layer(Layer(5))
+    model.add_layer(Layer(10))
+    model.add_layer(Layer(8))
+    model.init_weights()
 
-
-
+    print(model.layers[0].weights.shape)
+    print(model.layers[1].weights.shape)
+    print(model.layers[2].weights.shape)
 
 
 if __name__ == "__main__":
