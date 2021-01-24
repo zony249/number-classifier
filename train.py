@@ -4,6 +4,7 @@ import idx2numpy
 
 from crossval import *
 from nn import *
+from utils import *
 
 def main():
 
@@ -24,12 +25,18 @@ def main():
     model.add_layer(Layer(5))
     model.add_layer(Layer(10))
     model.add_layer(Layer(8))
+    model.add_layer(Layer(12))
+    model.add_layer(Layer(3))
     model.init_weights()
 
-    print(model.layers[0].weights.shape)
-    print(model.layers[1].weights.shape)
-    print(model.layers[2].weights.shape)
 
+    x = np.array([-2, -1, 0, 1, 2])
+    print(x)
+    
+    print(model.feed_forward(x))
+
+    print(trainY)
+    model.load_train_from_array(trainX, trainY)
 
 if __name__ == "__main__":
 
