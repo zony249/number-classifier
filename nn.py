@@ -18,18 +18,10 @@ class Layer:
         self.delta_accumulatror = np.zeros((rows, cols))
 
     def add_bias(self):
-        if not self.has_bias:
-            self.features = np.concatenate(([[1]], self.features), axis=0)
-            self.has_bias = True
-        else:
-            print("This layer already has a bias")
-
+        
+        self.features = np.concatenate(([[1]], self.features), axis=0)
     def remove_bias(self):
-        if self.has_bias:
-            self.features = self.features[1:, :]
-            self.has_bias = False
-        else: 
-            print("This layer does not have a bias")
+        self.features = self.features[1:, :]
 
     def set_val(self, np_arr):
         # set val assumes bias has not been added
@@ -61,7 +53,7 @@ class NN:
         self.lr = lr
 
     def load_train_from_array(self, trainX, trainY):
-        self.trainY = np.zeros((trainY.shape[0], 10))
+        self.trainY = np.zeros((trainY.shape[0], 10)) # (m x 10) because there are 10 classes
         for i in range(trainY.shape[0]):
             self.trainY[i][trainY[i]] = 1
         self.trainX = trainX
@@ -81,11 +73,22 @@ class NN:
         return hyp
     def back_prop(self, y):
         last = len(self.layers)-1
-        # self.layers[last].error = np.add(self.layers[last], -1 * self.y)
+        self.layers[last].error = np.add(self.layers[last].features, -1 * y)
+        for i in range(1, last):
+            self.layers[last - i].error = np.matmul(self.layers[last-i].weights.transpose(), self.layers[last-i+1].error)
+            derivative_sig = sigmoid(np.matmul(self.layers[last-i-1].weights, self.layers[last-i-1].features)) # shape without bias
+            derivative_sig = np.multiply(derivative_sig, np.add(np.ones(derivative_sig.shape), -1* derivative_sig)) # sig (1 - sig)
+            derivative_sig = np.concatenate((np.array([[i]]), derivative_sig), axis=0) # add bias to get compatible shape.
+            print(self.layers[last-i].error.shape, derivative_sig.shape) 
+            self.layers[last - i].error = np.multiply(self.layers[last-i].error, derivative_sig)
+            self.layers[last - i].error = self.layers[last - i].error[1:, :] # removes bias unit
+
         
         ######### NEXT STEP ###########
         # - y will be supplied by self.train() 
         #   (self.train is yet to be made)
+        # - back_prop -- finished calculating errors, now 
+        #   update each weight matrix accumulator with errors
         # - 
         #
         #

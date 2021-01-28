@@ -33,7 +33,9 @@ def main():
     x = np.array([-2, -1, 0, 1, 2])
     print(x)
     
-    print(model.feed_forward(x))
+    hyp = model.feed_forward(x)
+    print(hyp)
+    model.back_prop(np.array([[-2], [-3], [-4]]))
 
     print(trainY)
     model.load_train_from_array(trainX, trainY)
